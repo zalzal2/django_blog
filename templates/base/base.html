@@ -1,0 +1,169 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>Blog</title>
+
+  <link rel="stylesheet" href="{% static '/libs/bootstrap-4.6.2/css/bootstrap.min.css' %}" />
+  <link rel="stylesheet" href="{% static '/libs/font-awesome-6.2.1/css/all.min.css' %}" />
+  <link rel="stylesheet" href="/static/css/sidemenu.css">
+</head>
+
+<body>
+  <!-- top menu -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container ">
+      <a class="navbar-brand" href="#">ノート</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation"><span
+          class="navbar-toggler-icon"></span></button>
+
+      <ul class="navbar-nav">
+        <li>
+          <form class="form-inline">
+            <div class="input-group">
+              <input type="text" name="keyword" id="btnSearch" class="form-control">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </div>
+          </form>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Log In</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Sign up</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <!-- //top menu -->
+
+  <div class="border-top" id="page-content-wrapper">
+    <div class="row">
+      <!-- side-menu -->
+      <div class="col-md-2">
+        <!--좌측사이드바-메뉴박스-->
+        <div class="accordion">
+          <div class="cate">
+            <span class="menu">
+              <a href="javascript:void(0);" class="menulink"> 블로그 </a>
+            </span>
+            <ul>
+              {% for category in categories %}
+              <li class="nav-link"><a href="{% url 'posts:category' category.slug %}">{ category }</a>
+                {% endfor %}
+            </ul>
+          </div>
+          <div class="cate">
+            <span class="menu">
+              <a href="javascript:void(0);" class="menulink"> 공지 </a>
+            </span>
+            <ul>
+              <li>이용안내</li>
+              <li>이벤트</li>
+              <li>공지사항</li>
+            </ul>
+          </div>
+          <div class="cate">
+            <span class="menu">
+              <a href="javascript:void(0);" class="menulink"> 강 </a>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 메인 콘텐츠 -->
+      <div class="container">
+        <div class="row">
+          <!-- 추천 게시글 || 공지사항 || 이벤트  -->
+          <div class="col-3">
+            <div class="card" style="margin-top: 50px;">
+              <div class="card-body">
+                <h5 class="card-title">Lorem</h5>
+                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam egestas sed sem
+                  ut malesuada.</p>
+                <a href="#" class="btn btn-primary">More</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="card" style="margin-top: 50px;">
+              <div class="card-body">
+                <h5 class="card-title">Lorem</h5>
+                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam egestas sed sem
+                  ut malesuada.</p>
+                <a href="#" class="btn btn-primary">More</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="card" style="margin-top: 50px;">
+              <div class="card-body">
+                <h5 class="card-title">Lorem</h5>
+                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam egestas sed sem
+                  ut malesuada.</p>
+                <a href="#" class="btn btn-primary">More</a>
+              </div>
+            </div>
+          </div>
+          <!-- //추천 게시글 || 공지사항 || 이벤트 -->
+          <div class="container">
+            <div class="col-10">
+              <div style="margin-top: 100px; margin-bottom: 100px;">
+                <br />
+
+                <img src="https://via.placeholder.com/800x400" alt="placeholder" />
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+
+
+
+
+      </div>
+    </div>
+    <!---->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">
+          Copyright © Do It Django A to Z 2021
+        </p>
+      </div>
+    </footer>
+    <!-- jquery -->
+
+    <script src="{% static '/libs/jquery-3.6.3/jquery-3.6.3.min.js' %}"></script>
+    <script src="{% static '/libs/popper-1.16.1/popper.min.js' %}"></script>
+    <script src="{% static '/libs/bootstrap-4.6.2/js/bootstrap.min.js' %}"></script>
+    <script src="{% static '/libs/font-awesome-6.2.1/js/all.min.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+      integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+      (function ($) {
+        $('.cate ul').hide();
+        $('.cate .menu .menulink').click(function () {
+          if ($(this).hasClass('active')) {
+            $(this).parent().next().slideUp('slow');
+            $(this).removeClass('active');
+          } else {
+            $('.accordion').find('.active').parent().next().slideUp('slow');
+            $('.accordion').find('.active').removeClass('active');
+            $(this).parent().next().slideDown('slow');
+            $(this).addClass('active');
+          }
+
+        });
+      })(jQuery);
+    </script>
+
+</body>
+
+</html>
